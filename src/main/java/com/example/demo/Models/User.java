@@ -24,7 +24,7 @@ public class User {
     @Column
     private String name;
 
-    @Column(unique = true, nullable = false) // we till jpa that when it generates the tables in DB, it must also create the unique and not null constraints
+    @Column(unique = true, nullable = false) // we tell jpa that when it generates the tables in DB, it must also create the unique and not null constraints
     // for the annotated field
     private String username;
 
