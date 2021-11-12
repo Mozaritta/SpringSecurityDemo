@@ -25,22 +25,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+////        there are different ways to tell spring how to look for the users
+////        first
+////        auth.inMemoryAuthentication();
+////        auth.jdbcAuthentication() so I ccan create a service class and
+////        then pasing all the queries and everything then use JDBC to make my own request and then
+////        override the JDBC user detail manager configure and do all this stuff.
+////        but we have JPA we don't have to do everything by hand
+//        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+//                // what this will do is accept a user detail service, which is a bean that we have
+//                // to override until spring have to go to look for the users
+//
+////        super.configure(auth);
+//    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        there are different ways to tell spring how to look for the users
-//        first
-//        auth.inMemoryAuthentication();
-//        auth.jdbcAuthentication() so I ccan create a service class and
-//        then pasing all the queries and everything then use JDBC to make my own request and then
-//        override the JDBC user detail manager configure and do all this stuff.
-//        but we have JPA we don't have to do everything by hand
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-                // what this will do is accept a user detail service, which is a bean that we have
-                // to override until spring have to go to look for the users
-
-//        super.configure(auth);
     }
-
     @Bean @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
