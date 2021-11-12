@@ -1,11 +1,10 @@
 package com.example.demo.Controllers;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import com.example.demo.Models.User;
 import com.example.demo.Models.Role;
 import lombok.RequiredArgsConstructor;
-//import com.example.demo.Data.RoleToUserForm;
+import com.example.demo.Data.RoleToUserForm;
 import com.example.demo.Services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,13 +50,5 @@ public class UserController {
         userService.affectRole(form.getUserName(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
+
 }
-
-@Data
-class RoleToUserForm{
-
-    private String userName;
-    private String roleName;
-}
-
-
