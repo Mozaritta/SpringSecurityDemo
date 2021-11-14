@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ////        there are different ways to tell spring how to look for the users
 ////        first
 ////        auth.inMemoryAuthentication();
-////        auth.jdbcAuthentication() so I ccan create a service class and
-////        then pasing all the queries and everything then use JDBC to make my own request and then
+////        auth.jdbcAuthentication() so I can create a service class and
+////        then passing all the queries and everything then use JDBC to make my own request and then
 ////        override the JDBC user detail manager configure and do all this stuff.
 ////        but we have JPA we don't have to do everything by hand
 //        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(http);
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**", "/api/refreshToken/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(GET, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();

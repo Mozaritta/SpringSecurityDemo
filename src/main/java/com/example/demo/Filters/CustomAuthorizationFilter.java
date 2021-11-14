@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +19,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -25,6 +26,9 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
+
+@ComponentScan
+@EnableAutoConfiguration
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     public final static String ERROR_LOGIN = "Error logging in : ";
@@ -42,6 +46,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
         test.add(username);
         return test;
     }
+
     public void authorizationFunction(String authorizationHeader){
         ArrayList test = tokenFunction(authorizationHeader);
         String[] roles = (String[]) test.get(1);
@@ -73,7 +78,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        if(request.getServletPath().equals("/login")){
+        if(request.getServletPath().equals("/login") || request.getServletPath().equals("/api/refreshToken")){
             filterChain.doFilter(request, response);
         } else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);

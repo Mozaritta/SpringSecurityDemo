@@ -12,8 +12,8 @@ import com.example.demo.Models.Role;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.Data.RoleToUserForm;
 import com.example.demo.Services.UserService;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -32,11 +31,13 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@ComponentScan("com.example.demo.Filters.CustomAuthorizationFilter")
 public class UserController{
 
-    private final UserService userService;
-    private final CustomAuthorizationFilter authorizationFilter;
-    private final CustomAuthenticationFilter authenticationFilter;
+    public final UserService userService;
+    public final CustomAuthorizationFilter authorizationFilter;
+    public final CustomAuthenticationFilter authenticationFilter;
+
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){
