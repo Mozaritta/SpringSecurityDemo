@@ -14,6 +14,7 @@ import com.example.demo.Data.RoleToUserForm;
 import com.example.demo.Services.UserService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Slf4j
+@Controller
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")

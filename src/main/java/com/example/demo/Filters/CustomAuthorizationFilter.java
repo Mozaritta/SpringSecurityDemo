@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,9 +26,8 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
-
-@ComponentScan
-@EnableAutoConfiguration
+@Order(1)
+@Component
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     public final static String ERROR_LOGIN = "Error logging in : ";
